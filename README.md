@@ -2,7 +2,7 @@
 For research into the save file structure and modding in general visit the Monster Hunter World Modding Discord: https://discord.gg/gJwMdhK  
 We are currently looking for code writers to implement additional sections that have already been mapped out.  
   
-This is a MHW Save Editor. For the time being it allows changing the steam id (in case you want to use someone else's save) and editing the investigation list.  
+This is a MHW Save Editor. For the time being it allows changing the steam id (in case you want to use someone else's save), editing the investigation list, editing inventory, editing your name and resetting your edit voucher usage.  
   
 Credit to:  
 nexusphobiker - For figuring out the encryption function location in memory and having the first decrypter.  
