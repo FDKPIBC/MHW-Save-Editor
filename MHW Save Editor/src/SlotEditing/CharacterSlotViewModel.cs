@@ -20,6 +20,7 @@ namespace MHW_Save_Editor.SlotEditing
         }
 
         public string HunterName{ get => charslot.HunterName; set => charslot.HunterName = value; }
+        public string PalicoName { get => charslot.PalicoName; set => charslot.PalicoName = value; }
         public UInt32 HunterRank { get => charslot.HunterRank; set => charslot.HunterRank = value; }
         public UInt32 Zenny  { get => charslot.Zenny; set => charslot.Zenny = value; }
         public UInt32 ResearchPoints { get => charslot.ResearchPoints; set => charslot.ResearchPoints = value; }
@@ -56,6 +57,7 @@ namespace MHW_Save_Editor.SlotEditing
         {
             charslot.Serialize().CopyTo(savefile,offset);
             BitConverter.GetBytes(charslot.Gender).CopyTo(savefile, offset + 0xb0);
+            charslot.serializePalico().CopyTo(savefile, offset + charslot.palicoOffset);
         }
     }
     

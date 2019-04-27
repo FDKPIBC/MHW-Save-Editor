@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using MHW_Save_Editor.InventoryEditing;
 using MHW_Save_Editor.InvestigationEditing;
 
@@ -19,6 +20,13 @@ namespace MHW_Save_Editor.SaveSlot
         
         private byte[] _HunterName { get; set; }
         public string HunterName { get => _HunterName.DecodeUTF8(); set => _HunterName = value.ToFixedSizeCharArray(64); }
+
+        //Hacky abomination till Palico structure is properly figured so that all of this can be properly corrected.
+        private byte[] _PalicoName { get; set; }
+        public string PalicoName { get => _PalicoName.DecodeUTF8(); set => _PalicoName = value.ToFixedSizeCharArray(16); }
+        public int palicoOffset = 0xDA671;
+
+        public byte[] serializePalico(){return _PalicoName;}
 
         public UInt32 HunterRank;
         public UInt32 Zenny;
@@ -40,6 +48,7 @@ namespace MHW_Save_Editor.SaveSlot
         {
             int i = 0;
             _HunterName = newdata.Slice(0, 64); i+=64;
+            _PalicoName = newdata.Slice(palicoOffset, palicoOffset + 16);
             HunterRank = BitConverter.ToUInt32(newdata,i);i+=4;
             Zenny = BitConverter.ToUInt32(newdata,i);i+=4;
             ResearchPoints = BitConverter.ToUInt32(newdata,i);i+=4;
