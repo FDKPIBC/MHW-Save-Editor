@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
+using System.Windows.Data;
 using MHW_Save_Editor.InventoryEditing;
 using MHW_Save_Editor.InvestigationEditing;
 
@@ -25,8 +26,15 @@ namespace MHW_Save_Editor.SaveSlot
         private byte[] _PalicoName { get; set; }
         public string PalicoName { get => _PalicoName.DecodeUTF8(); set => _PalicoName = value.ToFixedSizeCharArray(16); }
         public int palicoOffset = 0xDA671;
+        public int unityOffset = 0xDA6f5;
 
         public byte[] serializePalico(){return _PalicoName;}
+
+        public byte[] serializeUnity()
+        {
+            return BitConverter.GetBytes(trapper).Concat(BitConverter.GetBytes(protector)).Concat(BitConverter.GetBytes(trouper))
+                .Concat(BitConverter.GetBytes(plunder)).Concat(BitConverter.GetBytes(gaja)).ToArray();
+        }
 
         public UInt32 HunterRank;
         public UInt32 Zenny;
@@ -34,6 +42,12 @@ namespace MHW_Save_Editor.SaveSlot
         public UInt32 HunterXP;
         public UInt32 PlayTime;
         public UInt32 Gender;
+
+        public UInt32 trapper;
+        public UInt32 protector;
+        public UInt32 trouper;
+        public UInt32 plunder;
+        public UInt32 gaja;
         //public HunterAppearance HunterAppearance;
         //public PalicoAppearance PalicoAppearance;
         //public GuildCard GuildCard;
@@ -54,7 +68,12 @@ namespace MHW_Save_Editor.SaveSlot
             ResearchPoints = BitConverter.ToUInt32(newdata,i);i+=4;
             HunterXP = BitConverter.ToUInt32(newdata,i);i+=4;
             PlayTime = BitConverter.ToUInt32(newdata,i);
-
+            int j = unityOffset;
+            trapper = BitConverter.ToUInt32(newdata,j);j+=4;
+            protector = BitConverter.ToUInt32(newdata,j);j+=4;
+            trouper = BitConverter.ToUInt32(newdata,j);j+=4;
+            plunder = BitConverter.ToUInt32(newdata,j);j+=4;
+            gaja = BitConverter.ToUInt32(newdata,j);
             Gender = BitConverter.ToUInt32(newdata, 0xb0);
         }
 
