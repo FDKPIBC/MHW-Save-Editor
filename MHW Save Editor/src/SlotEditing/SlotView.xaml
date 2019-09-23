@@ -9,12 +9,17 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <local:EnumBooleanConverter x:Key="EnumBooleanConverter" />
+        <local:UnityConverter x:Key="UnityConverter" />
     </UserControl.Resources>
     <Grid>
         <ListBox Name="ListBox" HorizontalContentAlignment="Stretch" DataContext="{Binding VisibleSlot}">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Hunter Name: " VerticalAlignment="Center"/>
                 <TextBox Text="{Binding HunterName, Mode=TwoWay}" UndoLimit = "1" MaxLength = "64" BorderBrush="Transparent" Background="Transparent" SelectionBrush="Transparent"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Palico Name: " VerticalAlignment="Center"/>
+                <TextBox Text="{Binding PalicoName, Mode=TwoWay}" MaxLength = "16" BorderBrush="Transparent" Background="Transparent" SelectionBrush="Transparent"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="Hunter Rank: " VerticalAlignment="Center"/>
@@ -68,6 +73,54 @@
                 <RadioButton IsChecked="{Binding Gender, Converter={StaticResource EnumBooleanConverter}, 
                 ConverterParameter={x:Static local:GenderEnum.Female}, Mode=TwoWay}"
                              VerticalAlignment="Bottom"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Palico Unity: " VerticalAlignment="Center"/>
+            </StackPanel>   
+            <StackPanel Orientation="Horizontal">
+                <xctk:IntegerUpDown Text="{Binding trapper, Mode=TwoWay}" ShowButtonSpinner = "True" 
+                                    Minimum = "0" Maximum = "700" 
+                                    HorizontalAlignment="Left" FormatString="N0"
+                                    BorderBrush="Transparent" Background="Transparent"/>
+                <TextBlock Text=" Trapper: " VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding trapper, Converter={StaticResource UnityConverter}, Mode=OneWay}"
+                    VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <xctk:IntegerUpDown Text="{Binding protector, Mode=TwoWay}" ShowButtonSpinner = "True" 
+                                    Minimum = "0" Maximum = "700" 
+                                    HorizontalAlignment="Left" FormatString="N0"
+                                    BorderBrush="Transparent" Background="Transparent"/>
+                <TextBlock Text=" Protectors: " VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding protector, Converter={StaticResource UnityConverter}, Mode=OneWay}"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <xctk:IntegerUpDown Text="{Binding trouper, Mode=TwoWay}" ShowButtonSpinner = "True" 
+                                    Minimum = "0" Maximum = "700" 
+                                    HorizontalAlignment="Left" FormatString="N0"
+                                    BorderBrush="Transparent" Background="Transparent"/>
+                <TextBlock Text=" Troupers: " VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding trouper, Converter={StaticResource UnityConverter}, Mode=OneWay}"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <xctk:IntegerUpDown Text="{Binding plunder, Mode=TwoWay}" ShowButtonSpinner = "True" 
+                                    Minimum = "0" Maximum = "700" 
+                                    HorizontalAlignment="Left" FormatString="N0"
+                                    BorderBrush="Transparent" Background="Transparent"/>
+                <TextBlock Text=" Plunderers :" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding plunder, Converter={StaticResource UnityConverter}, Mode=OneWay}"
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <xctk:IntegerUpDown Text="{Binding gaja, Mode=TwoWay}" ShowButtonSpinner = "True" 
+                                    Minimum = "0" Maximum = "700" 
+                                    HorizontalAlignment="Left" FormatString="N0"
+                                    BorderBrush="Transparent" Background="Transparent"/>
+                <TextBlock Text=" Gajalaka :" VerticalAlignment="Center"/>
+                <TextBlock Text="{Binding gaja, Converter={StaticResource UnityConverter}, Mode=OneWay}"
+                           VerticalAlignment="Center"/>
             </StackPanel>
         </ListBox>
     </Grid>
